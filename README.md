@@ -1,73 +1,57 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Simple REST with Nest
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This project is a showcase of my expertise in back-end development using NestJS. It demonstrates a RESTful API architecture with features like CI/CD, Automated testing, Authentication and Authorization, ORM, and containerization.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+It highlights my ability to build scalable and secure applications, utilizing modern technologies and best practices.
 
-## Description
+### Dependencies
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- [NestJs](https://docs.nestjs.com/) using `@nestjs/cli`
+- [MikroORM](https://mikro-orm.io/) + [PostgreSQL](https://www.postgresql.org/)
+- [CI/CD](https://github.com/features/actions)
+- [Docker](https://www.docker.com/)
+- [Kubernetes](https://kubernetes.io/)
 
-## Installation
+### Execution
 
 ```bash
-$ npm install
+yarn install
+cp .env.template .env
+yarn start
+yarn test
 ```
 
-## Running the app
+### Migrations with MikroORM
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+yarn generate_migration
+yarn revert_db
+yarn migrate_db
 ```
 
-## Test
+### CI/CD to Production
 
 ```bash
-# unit tests
-$ npm run test
+# build publishable image
+docker build --file ./docker/pub.dockerfile --name [target_image] .
 
-# e2e tests
-$ npm run test:e2e
+# login using specific user docker login docker.io -u username -p password
+docker login docker.io
 
-# test coverage
-$ npm run test:cov
+# publish the image to your docker repository
+docker tag [target_image] [username]/[target_image]:[rel_version_]
+docker push [username]/[target_image]:[rel_version_]
+
+# logout from docker
+docker logout
 ```
 
-## Support
+### Dev-Ops
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+The `./devops` directory contains a simple example of a k8s deployment for this image. In real world implementation though, it is best to not have the devops in this repo but rather implemented separately and managed by dedicated DevOps engineers.
 
-## Stay in touch
+### TODO
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- add `Reset password` API
+- add `Logout` API that flags the token as blacklisted to avoid re-use
+- improve `FileService` upload (S3, buckets, spaces, etc)
