@@ -100,7 +100,7 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "{src,test}/**/*.ts": "yarn format && yarn lint"
+    "{src,test}/**/*.ts": ["yarn format", "yarn lint"]
   },
   "husky": {
     "hooks": {
