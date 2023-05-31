@@ -33,25 +33,21 @@ yarn migrate_db
 
 ```bash
 # build publishable image
-docker build --file ./docker/pub.dockerfile --name [target_image] .
+docker build --file ./dockerfile --tag [image_name]:[version] . --no-cache --progress=plain
 
 # login using specific user docker login docker.io -u username -p password
 docker login docker.io
 
 # publish the image to your docker repository
-docker tag [target_image] [username]/[target_image]:[rel_version_]
-docker push [username]/[target_image]:[rel_version_]
+docker push [username]/[image_name]:[version]
 
 # logout from docker
 docker logout
 ```
-
-### Dev-Ops
-
-The `./devops` directory contains a simple example of a k8s deployment for this image. In real world implementation though, it is best to not have the devops in this repo but rather implemented separately and managed by dedicated DevOps engineers.
 
 ### TODO
 
 - add `Reset password` API
 - add `Logout` API that flags the token as blacklisted to avoid re-use
 - improve `FileService` upload (S3, buckets, spaces, etc)
+- add API to verify captcha validity

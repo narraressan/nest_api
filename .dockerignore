@@ -33,3 +33,9 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Others
+/test/coverage
+/upload/**
+!**/.gitkeep
+/postgres_data
