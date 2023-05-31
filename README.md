@@ -10,7 +10,6 @@ It highlights my ability to build scalable and secure applications, utilizing mo
 - [MikroORM](https://mikro-orm.io/) + [PostgreSQL](https://www.postgresql.org/)
 - [CI/CD](https://github.com/features/actions)
 - [Docker](https://www.docker.com/)
-- [Kubernetes](https://kubernetes.io/)
 
 ### Execution
 
@@ -32,16 +31,12 @@ yarn migrate_db
 ### CI/CD to Production
 
 ```bash
-# build publishable image
 docker build --file ./dockerfile --tag [image_name]:[version] . --no-cache --progress=plain
 
+# Publish image to registry
 # login using specific user docker login docker.io -u username -p password
 docker login docker.io
-
-# publish the image to your docker repository
 docker push [username]/[image_name]:[version]
-
-# logout from docker
 docker logout
 ```
 
