@@ -9,7 +9,7 @@ services:
     networks:
       - postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - ./postgres_data:/var/lib/postgresql/data/
       - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
     ports:
       - 5432:5432
@@ -19,16 +19,16 @@ services:
       - POSTGRES_PASSWORD=supersecret
   
   # enable only when target image exists
-  # nest_api:
-  #     image: nest_api
-  #     env_file:
-  #       - .env
-  #     ports:
-  #       - "3000:3000"
-  #     depends_on:
-  #       - database
-  #     networks:
-  #       - postgres
+  nest_api:
+    image: nest_api:v2
+    environment:
+      - DB_HOST=database
+    ports:
+      - "80:3030" 
+    depends_on:
+      - database
+    networks:
+      - postgres
 
 volumes:
   postgres_data:
