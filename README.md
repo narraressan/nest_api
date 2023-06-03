@@ -11,6 +11,8 @@ It highlights my ability to build scalable and secure applications, utilizing mo
 - [CI/CD](https://github.com/features/actions)
 - [Docker](https://www.docker.com/)
 
+Note: open [Swagger](http://localhost:3030/api) for API testing and [Swagger-stats](http://localhost:3030/swagger-stats/#/) for stats
+
 ### Execution
 
 ```bash

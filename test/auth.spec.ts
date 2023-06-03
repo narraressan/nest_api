@@ -21,7 +21,7 @@ describe('AppController (e2e)', () => {
   });
 
   afterAll(async () => {
-    orm.close();
+    await orm.close();
   });
 
   it('test /auth/register api', async () => {

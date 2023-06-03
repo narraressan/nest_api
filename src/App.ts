@@ -20,6 +20,7 @@ export const bootstrap = async (port: number, env: string) => {
     new ValidationPipe({
       transform: true,
       forbidNonWhitelisted: true,
+      validateCustomDecorators: true,
     }),
   );
   app.useGlobalFilters(

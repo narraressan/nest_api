@@ -5,7 +5,7 @@ import {
   RequestMethod,
 } from '@nestjs/common';
 import { LoggerMiddleware } from 'src/middlewares/Logger.middleware';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import ThrottleConfig from 'src/config/Throttle.config';
@@ -19,6 +19,7 @@ import { HealthModule } from './Health.module';
 import { FileModule } from './Files.module';
 import { AuthService } from 'src/services/Auth.service';
 import { JwtStrategy } from 'src/guards/Auth.guard';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 const common = [
   ConfigModule.forRoot({
@@ -40,6 +41,10 @@ const common = [
     {
       provide: APP_INTERCEPTOR,
       useClass: ReactionMeterInterceptor,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
     JwtStrategy,
     AuthService,
