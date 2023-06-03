@@ -21,6 +21,7 @@ services:
   # enable only when target image exists
   nest_api:
     image: nest_api:v2
+    restart: always
     environment:
       - DB_HOST=database
     ports:
