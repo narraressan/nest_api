@@ -25,8 +25,8 @@ describe('Files', () => {
     auth = await app.get(AuthService);
   });
 
-  afterAll(() => {
-    orm.close();
+  afterAll(async () => {
+    await orm.close();
   });
 
   it('Test that upload will fail because of invalid user role', async () => {
