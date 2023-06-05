@@ -1,7 +1,7 @@
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-const loadConfig = (env: ConfigService) => {
+const loadConfig = async (env: ConfigService): Promise<Record<string, any>> => {
   const params = {
     secret: env.get('JWT_SECRET'),
   };
@@ -13,5 +13,5 @@ const loadConfig = (env: ConfigService) => {
 export default JwtModule.registerAsync({
   imports: [ConfigModule],
   inject: [ConfigService],
-  useFactory: (env: ConfigService) => loadConfig(env),
+  useFactory: async (env: ConfigService) => await loadConfig(env),
 });

@@ -17,8 +17,8 @@ Note: open [Swagger](http://localhost:3030/api) for API testing and [Swagger-sta
 
 ```bash
 yarn install
-cp .env.template .env
-yarn start
+docker-compose up database -d
+yarn dev
 yarn test
 ```
 
@@ -30,7 +30,7 @@ yarn revert_db
 yarn migrate_db
 ```
 
-### CI/CD to Production
+### Dockerize
 
 ```bash
 docker build --file ./dockerfile --tag [image_name]:[version] . --no-cache --progress=plain
@@ -48,3 +48,4 @@ docker logout
 - add `Logout` API that flags the token as blacklisted to avoid re-use
 - improve `FileService` upload (S3, buckets, spaces, etc)
 - add API to verify captcha validity
+- add github pipelines

@@ -123,7 +123,8 @@
           "enumItems": [
             "ADMIN",
             "MANAGEMENT",
-            "USER"
+            "USER",
+            "EXTERNAL"
           ],
           "mappedType": "enum"
         },

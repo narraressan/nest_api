@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import { ThrottlerGuard } from '@nestjs/throttler';
 import { UserRoleEnum } from 'src/db/entities/Base';
 import { UploadedFileDto } from 'src/dto/File.dto';
 import { IsPrivateApi } from 'src/guards/Auth.guard';
@@ -17,7 +16,7 @@ import { FileService } from 'src/services/Files.service';
 @ApiTags('File')
 @ApiBearerAuth()
 @UserRoles(UserRoleEnum.ADMIN, UserRoleEnum.MANAGEMENT)
-@UseGuards(IsPrivateApi, ThrottlerGuard, UserRolesGuard)
+@UseGuards(IsPrivateApi, UserRolesGuard)
 @Controller()
 export class FileController {
   constructor(private readonly fileService: FileService) {}

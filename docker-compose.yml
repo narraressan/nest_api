@@ -6,8 +6,6 @@ services:
   database:
     image: postgres:13-alpine
     restart: always
-    networks:
-      - postgres
     volumes:
       - ./postgres_data:/var/lib/postgresql/data/
       - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
@@ -17,23 +15,24 @@ services:
       - POSTGRES_DB=for_demo
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=supersecret
+    
+  redis:
+    image: "redis:6.0-alpine"
+    ports:
+      - "6379:6379"
   
   # enable only when target image exists
-  nest_api:
-    image: nest_api:v2
+  service:
+    image: nest_api:v1
     restart: always
     environment:
       - DB_HOST=database
+      - QUEUE_HOST=redis
     ports:
       - "80:3030" 
     depends_on:
       - database
-    networks:
-      - postgres
-
+      - redis
+  
 volumes:
   postgres_data:
-
-networks:
-  postgres:
-    driver: bridge
