@@ -1,11 +1,10 @@
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-const loadConfig = () => {
-  const { THROTTLE_TTL, THROTTLE_LIMIT } = process.env;
+const loadConfig = async (env: ConfigService): Promise<Record<string, any>> => {
   const params = {
-    ttl: parseInt(THROTTLE_TTL),
-    limit: parseInt(THROTTLE_LIMIT),
+    ttl: parseInt(env.get('THROTTLE_TTL')),
+    limit: parseInt(env.get('THROTTLE_LIMIT')),
   };
 
   console.log(`THROTTLE CONFIG: ${JSON.stringify(params)}`);
@@ -16,5 +15,5 @@ const loadConfig = () => {
 export default ThrottlerModule.forRootAsync({
   imports: [ConfigModule],
   inject: [ConfigService],
-  useFactory: () => loadConfig(),
+  useFactory: async (config: ConfigService) => await loadConfig(config),
 });

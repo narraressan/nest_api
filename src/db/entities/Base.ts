@@ -44,6 +44,7 @@ export enum UserRoleEnum {
   ADMIN = 'ADMIN',
   MANAGEMENT = 'MANAGEMENT',
   USER = 'USER',
+  EXTERNAL = 'EXTERNAL',
 }
 
 export class UserRole {
@@ -51,6 +52,7 @@ export class UserRole {
     if (unit === 'ADMIN') return UserRoleEnum.ADMIN;
     else if (unit === 'MANAGEMENT') return UserRoleEnum.MANAGEMENT;
     else if (unit === 'USER') return UserRoleEnum.USER;
+    else if (unit === 'EXTERNAL') return UserRoleEnum.EXTERNAL;
     return null;
   };
 }

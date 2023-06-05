@@ -4,14 +4,12 @@ import {
   HealthCheckService,
   HealthIndicatorResult,
 } from '@nestjs/terminus';
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { HealthService } from 'src/services/Health.service';
 import { ApiTags } from '@nestjs/swagger';
-import { ThrottlerGuard } from '@nestjs/throttler';
 
 @ApiTags('Utils')
 @Controller('health')
-@UseGuards(ThrottlerGuard)
 export class HealthController {
   constructor(
     private health: HealthCheckService,
