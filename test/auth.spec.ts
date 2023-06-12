@@ -15,13 +15,14 @@ describe('AppController (e2e)', () => {
   let app: INestApplication;
   let orm: MikroORM;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await setupTest();
     orm = await initializeMikro();
   });
 
   afterAll(async () => {
     await orm.close();
+    await app.close();
   });
 
   it('test /auth/register api', async () => {

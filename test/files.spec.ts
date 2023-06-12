@@ -18,7 +18,7 @@ describe('Files', () => {
   let em: EntityManager;
   let auth: AuthService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await setupTest();
     orm = await initializeMikro();
     em = orm.em as EntityManager;
@@ -27,6 +27,7 @@ describe('Files', () => {
 
   afterAll(async () => {
     await orm.close();
+    await app.close();
   });
 
   it('Test that upload will fail because of invalid user role', async () => {
