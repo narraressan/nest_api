@@ -31,8 +31,12 @@ const healthService = {
 describe('Health', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     app = await setupTest();
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 
   it('Test healthCheck() to summarize status of all running dependencies', async () => {
