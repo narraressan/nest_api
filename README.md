@@ -48,4 +48,3 @@ docker logout
 - add `Logout` API that flags the token as blacklisted to avoid re-use
 - improve `FileService` upload (S3, buckets, spaces, etc)
 - add API to verify captcha validity
-- add github pipelines
